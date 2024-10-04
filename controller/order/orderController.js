@@ -327,7 +327,7 @@ exports.getOrdersAdmin = async (req, res) => {
       return {
         ...order._doc,
         _items: _items,
-        delivery: delivery.name || "Unknown Delivery",
+        delivery: delivery?.name || "Unknown Delivery",
         user_data: user,
       };
     });
@@ -382,7 +382,7 @@ exports.getOrderAdmin = async (req, res) => {
       data: {
         ...order._doc,
         _items: _items,
-        delivery: delivery.name|| "Unknown Delivery",
+        delivery: delivery?.name|| "Unknown Delivery",
         user_data: user,
       },
     });
