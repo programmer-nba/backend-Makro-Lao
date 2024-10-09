@@ -19,10 +19,11 @@ const getProducts = async (req, res) => {
         const categories = response2.data?.data
 
         const products = items?.map((item) => {
-            const category = categories?.find(c => c._id === item.product_category)
+            //const category = categories?.find(c => c._id === item.product_category)
             return {
                 ...item,
-                category_name: category?.name
+                category_name: item.product_category
+                //category_name: category?.name
             }
         })
 
