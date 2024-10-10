@@ -83,7 +83,7 @@ app.use(prefix, require("./router/order"));
 app.use(prefix, require("./router/payment"));
 app.use(prefix, require("./router/product"));
 
-const PORT = process.env.PORT || 12233;
+const PORT = process.env.PORT || 2233;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

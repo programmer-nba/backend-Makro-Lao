@@ -60,12 +60,13 @@ const fetchItems = async () => {
     const categories = response2.data?.data;
 
     const products = items?.map((item) => {
-      const category = categories?.find((c) => c._id === item.product_category);
+      //const category = categories?.find((c) => c._id === item.product_category);
       return {
         ...item,
-        category_name: category?.name,
+        category_name: item.product_category,
       };
     });
+    //console.log(products);
     all_items = products;
   } catch (err) {
     console.log(err.message);
@@ -184,10 +185,21 @@ exports.getOrders = async (req, res) => {
 
     const orderFormats = orders.map(async (order) => {
       const delivery = await Delivery.findById(order.delivery_id);
+      //console.log(order.line_items)
       const _items = order.line_items.map((item) => {
         const product = all_items.find(
-          (product) => product.product_id === item.product_id
+          (p) => p.product_id === item.product_id
         );
+        if (!product) {
+          return {
+            ...item._doc,
+            //product_category: item.product_category,
+            //category_name: product?.category_name,
+            //product_name: product.product_name,
+            //product_image: product.product_image,
+           //product_barcode: product.product_barcode,
+          };
+        }
         return {
           ...item._doc,
           product_category: product.product_category,
